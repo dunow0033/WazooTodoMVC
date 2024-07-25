@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.list-group-item {
+    display: grid;
+    grid-template-columns: 100px 1fr; /* Adjust column sizes as needed */
+    align-items: center; /* Center vertically */
+}

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WazooTodoMVC.Data;
 using WazooTodoMVC.Models;
+using WazooTodoMVC.Models.ViewModels;
 
 namespace WazooTodoMVC.Controllers
 {
@@ -27,6 +28,34 @@ namespace WazooTodoMVC.Controllers
 
             return View(todoItems);
         }
+
+        [HttpGet]
+        public IActionResult CreateTodo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateTodo(SubmitTodoRequest submitTodoRequest)
+        {
+            var todo = new TodoItem
+            {
+                Description = submitTodoRequest.Description
+            };
+
+            _context.TodoItems.Add(todo);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -9,9 +9,10 @@
             <ul class="list-group">
                 @foreach(var item in Model)
                 {
-                    <li class="list-group-item">
-                        <strong>Id:</strong>@item.Id &nbsp;&nbsp;&nbsp;
-                        <strong>Description:</strong>@item.Description
+                    <li class="list-group-item d-grid grid-cols-2">
+                        <span><strong>Id:</strong> @item.Id</span>
+                        <span><strong>Description:</strong> @item.Description</span>
+                        <span><a asp-area="" asp-controller="Home" asp-action="Edit">Edit</a></span>
                     </li>
                 }
             </ul>

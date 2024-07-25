@@ -15,13 +15,16 @@
         @if (Model != null && Model.Any())
         {
             <ul class="list-group">
-                @foreach (var item in Model)
-                {
-                    <li class="list-group-item">
-                        <strong>Id:</strong>@item.Id &nbsp;&nbsp;&nbsp;
-                        <strong>Description:</strong>@item.Description
-                    </li>
-                }
+                    <ul class="list-group">
+                        @foreach (var item in Model)
+                        {
+                            <li class="list-group-item d-grid grid-cols-2">
+                                <span><strong>Id:</strong> @item.Id</span>
+                                <span><strong>Description:</strong> @item.Description</span>
+                                <span><a asp-area="" asp-controller="Home" asp-action="Edit">Edit</a></span>
+                            </li>
+                        }
+                </ul>
             </ul>
         }
         else
@@ -31,9 +34,8 @@
     </div>
     <div class="row mt-3">
         <div class="col-auto">
-            <a class="btn btn-outline-success" onClick={createTodo}>
-                <i class="bi bi-pencil-square"></i>  Create a Todo
-            </a>
+            <a class="btn btn-outline-success" asp-area="" asp-controller="Home" asp-action="CreateTodo">
+                <i class="bi bi-pencil-square"></i>  Create a Todo</a>
         </div>
     </div>
 </div>

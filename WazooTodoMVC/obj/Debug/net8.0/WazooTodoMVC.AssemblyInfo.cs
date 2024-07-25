@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WazooTodoMVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+243a79bef7a4d181421a5462ac359cd4876103ac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b2b9506d70ffd9409bfa6a304c4638f5d91a303")]
 [assembly: System.Reflection.AssemblyProductAttribute("WazooTodoMVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WazooTodoMVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
