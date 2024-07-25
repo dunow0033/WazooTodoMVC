@@ -1,21 +1,13 @@
 ﻿@model IEnumerable<WazooTodoMVC.Models.TodoItem>
-<!--@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>-->
 
 <div class="bg-secondary bg-opacity-10 py-2">
     <div class="container">
         <h1>List of Todos:</h1>
 
-        @if (Model != null && Model.Any())
+        @if(Model != null && Model.Any())
         {
             <ul class="list-group">
-                @foreach (var item in Model)
+                @foreach(var item in Model)
                 {
                     <li class="list-group-item">
                         <strong>Id:</strong>@item.Id &nbsp;&nbsp;&nbsp;
@@ -28,12 +20,5 @@
         {
             <p>No todo items found!!</p>
         }
-    </div>
-    <div class="row mt-3">
-        <div class="col-auto">
-            <a class="btn btn-outline-success" onClick={createTodo}>
-                <i class="bi bi-pencil-square"></i>  Create a Todo
-            </a>
-        </div>
     </div>
 </div>

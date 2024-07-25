@@ -135,3 +135,4 @@ C:\Users\Admin\source\repos\WazooTodoMVC\WazooTodoMVC\obj\Debug\net8.0\refint\Wa
 C:\Users\Admin\source\repos\WazooTodoMVC\WazooTodoMVC\obj\Debug\net8.0\WazooTodoMVC.pdb
 C:\Users\Admin\source\repos\WazooTodoMVC\WazooTodoMVC\obj\Debug\net8.0\WazooTodoMVC.genruntimeconfig.cache
 C:\Users\Admin\source\repos\WazooTodoMVC\WazooTodoMVC\obj\Debug\net8.0\ref\WazooTodoMVC.dll
+C:\Users\Admin\source\repos\WazooTodoMVC\WazooTodoMVC\obj\Debug\net8.0\WazooTodoMVC.sourcelink.json
