@@ -1,0 +1,44 @@
+﻿@model WazooTodoMVC.Models.ViewModels.EditTodoRequest
+@{
+}
+
+<h1>Hello - Editing!!!</h1>
+
+<div class="row">
+    <div class="col-2">
+        <p>
+            <a class="btn btn-outline-success" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class="bi bi-arrow-left-square-fill"></i> Back
+            </a>
+        </p>
+    </div>
+    <div class="col-6">
+        <div class="bg-secondary bg-secondary bg-opacity-10 py-2">
+            <div class="container">
+                <h1>Edit Todo Item @Model.Id</h1>
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Id</label>
+                        <input type="text" id="id" class="form-control" value="@Model.Id" asp-for="Id" readonly />
+
+                        <br />
+                        <label class="form-label">Description</label>
+                        <input type="text" id="description" asp-for="Description" class="form-control"
+                               onkeydown="if(event.key === 'Enter') { this.form.submit(); return false; }" />
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-dark">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('description').focus();
+        });
+    </script>
+}

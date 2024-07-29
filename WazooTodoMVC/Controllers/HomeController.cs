@@ -50,11 +50,46 @@ namespace WazooTodoMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult EditTodo(long id)
         {
-            return View();
+            var editTodo = _context.TodoItems.FirstOrDefault(x => x.Id == id);
+
+            if (editTodo != null)
+            {
+                var editTodoRequest = new EditTodoRequest
+                {
+                    Id = editTodo.Id,
+                    Description = editTodo.Description
+                };
+
+                return View(editTodoRequest);
+            }
+
+            return View(null);
         }
 
+        [HttpPost]
+        public IActionResult EditTodo(EditTodoRequest editTodoRequest)
+        {
+            var todo = new TodoItem
+            {
+                Id = editTodoRequest.Id,
+                Description = editTodoRequest.Description
+            };
+
+            var existingTodo = _context.TodoItems.Find(todo.Id);
+
+            if(existingTodo != null)
+            {
+                existingTodo.Description = editTodoRequest.Description;
+
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("EditTodo", new { id = editTodoRequest.Id });
+            
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

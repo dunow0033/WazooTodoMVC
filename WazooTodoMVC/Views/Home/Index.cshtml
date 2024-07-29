@@ -21,7 +21,11 @@
                             <li class="list-group-item d-grid grid-cols-2">
                                 <span><strong>Id:</strong> @item.Id</span>
                                 <span><strong>Description:</strong> @item.Description</span>
-                                <span><a asp-area="" asp-controller="Home" asp-action="Edit">Edit</a></span>
+                                <span><a 
+                                        asp-area="" 
+                                        asp-controller="Home" 
+                                        asp-action="EditTodo"
+                                        asp-route-id="@item.Id">Edit</a></span>
                             </li>
                         }
                 </ul>
