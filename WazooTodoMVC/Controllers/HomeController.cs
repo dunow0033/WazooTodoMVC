@@ -91,6 +91,22 @@ namespace WazooTodoMVC.Controllers
             
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteTodo([FromBody] long id)
+        {
+
+            var deleteTodo = await _context.TodoItems.FirstOrDefaultAsync(x => x.Id == (id + 1));
+
+            if (deleteTodo != null)
+            {
+                _context.TodoItems.Remove(deleteTodo);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

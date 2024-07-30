@@ -5,7 +5,7 @@ namespace WazooTodoMVC.Data
 {
     public class TodoDbContext : DbContext
     {
-        public TodoDbContext(DbContextOptions options) : base(options)
+        public TodoDbContext(DbContextOptions<TodoDbContext> options) : base(options)
         {
         }
 

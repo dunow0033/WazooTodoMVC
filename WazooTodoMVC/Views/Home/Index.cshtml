@@ -18,15 +18,34 @@
                     <ul class="list-group">
                         @foreach (var item in Model)
                         {
-                            <li class="list-group-item d-grid grid-cols-2">
-                                <span><strong>Id:</strong> @item.Id</span>
-                                <span><strong>Description:</strong> @item.Description</span>
-                                <span><a 
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <strong>Id:</strong> @item.Id
+                                        <strong>Description:</strong> @item.Description
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span><a 
                                         asp-area="" 
                                         asp-controller="Home" 
                                         asp-action="EditTodo"
-                                        asp-route-id="@item.Id">Edit</a></span>
+                                        asp-route-id="@item.Id"
+                                        class="btn btn-link p-0">Edit</a>
+                                    </span>
+                                    <span>
+                                        <a href="#"
+                                            data-id="@item.Id"
+                                            class="btn btn-link text-danger p-0 delete-link">Delete</a>
+                                    </span>
+                                  </div>
                             </li>
+
+                        <!--asp-area=""
+                                    asp-controller="Home"
+                                    asp-action="DeleteTodo"
+                                    asp-route-id="@item.Id"-->
+
                         }
                 </ul>
             </ul>
@@ -43,3 +62,38 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const deleteLinks = document.querySelectorAll('.delete-link');
+
+            deleteLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const todoId = this.getAttribute('data-id');
+                    const confirmDelete = confirm('Are you sure you want to delete the todo item with ID # ' + todoId + '?');
+
+                    if (confirmDelete) {
+                        fetch('@Url.Action("DeleteTodo", "Home")', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ id: todoId + 1 })
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    window.location.reload(); // Reload the page on success
+                                } else {
+                                    alert('Failed to delete the todo item.');
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
+                    }
+                });
+            });
+        });
+    </script>
+}
