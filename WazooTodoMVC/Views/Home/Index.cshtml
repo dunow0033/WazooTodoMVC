@@ -36,7 +36,8 @@
                                     <span>
                                         <a href="#"
                                             data-id="@item.Id"
-                                            class="btn btn-link text-danger p-0 delete-link">Delete</a>
+                                            class="btn btn-link text-danger p-0 delete-link"
+                                            onclick="deleteTodo(@item.Id, '@item.Description')">Delete</a>
                                     </span>
                                   </div>
                             </li>
@@ -65,35 +66,35 @@
 
 @section Scripts {
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        // document.addEventListener('DOMContentLoaded', function () {
             
-            const deleteLinks = document.querySelectorAll('.delete-link');
+        //     const deleteLinks = document.querySelectorAll('.delete-link');
 
-            deleteLinks.forEach(function (link) {
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const todoId = this.getAttribute('data-id');
-                    const confirmDelete = confirm('Are you sure you want to delete the todo item with ID # ' + todoId + '?');
+        //     deleteLinks.forEach(function (link) {
+        //         link.addEventListener('click', function (event) {
+        //             event.preventDefault();
+        //             const todoId = this.getAttribute('data-id');
+        //             const confirmDelete = confirm('Are you sure you want to delete the todo item with ID # ' + todoId + '?');
 
-                    if (confirmDelete) {
-                        fetch('@Url.Action("DeleteTodo", "Home")', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ id: todoId + 1 })
-                        })
-                            .then(response => {
-                                if (response.ok) {
-                                    window.location.reload(); // Reload the page on success
-                                } else {
-                                    alert('Failed to delete the todo item.');
-                                }
-                            })
-                            .catch(error => console.error('Error:', error));
-                    }
-                });
-            });
-        });
+        //             if (confirmDelete) {
+        //                 fetch('@Url.Action("DeleteTodo", "Home")', {
+        //                     method: 'POST',
+        //                     headers: {
+        //                         'Content-Type': 'application/json',
+        //                     },
+        //                     body: JSON.stringify({ id: todoId + 1 })
+        //                 })
+        //                     .then(response => {
+        //                         if (response.ok) {
+        //                             window.location.reload(); // Reload the page on success
+        //                         } else {
+        //                             alert('Failed to delete the todo item.');
+        //                         }
+        //                     })
+        //                     .catch(error => console.error('Error:', error));
+        //             }
+        //         });
+        //     });
+        //});
     </script>
 }

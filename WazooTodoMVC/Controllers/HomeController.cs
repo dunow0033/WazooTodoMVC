@@ -92,19 +92,21 @@ namespace WazooTodoMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteTodo([FromBody] long id)
+        public JsonResult DeleteTodo(long id, string name)
         {
 
-            var deleteTodo = await _context.TodoItems.FirstOrDefaultAsync(x => x.Id == (id + 1));
+            var deleteTodo = _context.TodoItems.Find(id);
 
             if (deleteTodo != null)
             {
                 _context.TodoItems.Remove(deleteTodo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                _context.SaveChangesAsync();
+                return Json(new { success = true });
             }
-
-            return RedirectToAction("Index");
+            else
+            {
+                return Json(new { success = false, message = $"Todo item '{name}' was not found." });
+            }
         }
 
 
