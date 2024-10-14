@@ -1,12 +1,7 @@
 ﻿@model IEnumerable<WazooTodoMVC.Models.TodoItem>
-<!--@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Todo App";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>-->
 
 <div class="bg-secondary bg-opacity-10 py-2">
     <div class="container">
@@ -41,12 +36,6 @@
                                     </span>
                                   </div>
                             </li>
-
-                        <!--asp-area=""
-                                    asp-controller="Home"
-                                    asp-action="DeleteTodo"
-                                    asp-route-id="@item.Id"-->
-
                         }
                 </ul>
             </ul>
@@ -65,36 +54,20 @@
 </div>
 
 @section Scripts {
-    <script>
-        // document.addEventListener('DOMContentLoaded', function () {
-            
-        //     const deleteLinks = document.querySelectorAll('.delete-link');
-
-        //     deleteLinks.forEach(function (link) {
-        //         link.addEventListener('click', function (event) {
-        //             event.preventDefault();
-        //             const todoId = this.getAttribute('data-id');
-        //             const confirmDelete = confirm('Are you sure you want to delete the todo item with ID # ' + todoId + '?');
-
-        //             if (confirmDelete) {
-        //                 fetch('@Url.Action("DeleteTodo", "Home")', {
-        //                     method: 'POST',
-        //                     headers: {
-        //                         'Content-Type': 'application/json',
-        //                     },
-        //                     body: JSON.stringify({ id: todoId })
-        //                 })
-        //                     .then(response => {
-        //                         if (response.ok) {
-        //                             window.location.reload(); // Reload the page on success
-        //                         } else {
-        //                             alert('Failed to delete the todo item.');
-        //                         }
-        //                     })
-        //                     .catch(error => console.error('Error:', error));
-        //             }
-        //         });
-        //     });
-        //});
+    <script type="text/javascript">
+        @if(TempData["Description"] != null)
+        {
+            <text>
+                var todoDescription = "@TempData["Description"]";
+                alert("New Todo item added: " + todoDescription);
+            </text>
+        }
+        @if (TempData["EditedTodoId"] != null)
+        {
+            <text>
+                var editedTodoId = "@TempData["EditedTodoId"]";
+                alert("Todo item with ID # " + editedTodoId + " was successfully updated.");
+            </text>
+        }
     </script>
 }

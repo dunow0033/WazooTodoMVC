@@ -25,22 +25,7 @@ namespace WazooTodoMVC.Data
                     {
                         Id = 2,
                         Description = "Wash Car"
-                    },
-                    new()
-                    {
-                        Id = 3,
-                        Description = "Wash Dishes"
-                    },
-                    new()
-                    {
-                        Id = 4,
-                        Description = "Practice Coding"
-                    },
-                    new()
-                    {
-                        Id = 123,
-                        Description = "Walk the Dog"
-                    },
+                    }
                 });
         }
     }

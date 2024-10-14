@@ -1,5 +1,6 @@
 ﻿@model WazooTodoMVC.Models.ViewModels.EditTodoRequest
 @{
+    ViewData["Title"] = "Edit Todo";
 }
 
 <h1>Hello - Editing!!!</h1>
@@ -25,6 +26,7 @@
                         <label class="form-label">Description</label>
                         <input type="text" id="description" asp-for="Description" class="form-control"
                                onkeydown="if(event.key === 'Enter') { this.form.submit(); return false; }" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-dark">Update</button>

@@ -4,27 +4,24 @@ using System.Diagnostics;
 using WazooTodoMVC.Data;
 using WazooTodoMVC.Models;
 using WazooTodoMVC.Models.ViewModels;
+using WazooTodoMVC.Repositories;
 
 namespace WazooTodoMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly TodoDbContext _context;
+        private readonly ILogger<HomeController> logger;
+        private readonly ITodoRepository todoRepository;
 
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-        public HomeController(TodoDbContext context, ILogger<HomeController> logger)
+        public HomeController(ITodoRepository todoRepository, ILogger<HomeController> logger)
         {
-            _context = context;
-            _logger = logger;
+            this.todoRepository = todoRepository;
+            this.logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
-            var todoItems = await _context.TodoItems.ToListAsync();
+            var todoItems = await todoRepository.GetAllAsync();
 
             return View(todoItems);
         }
@@ -36,23 +33,24 @@ namespace WazooTodoMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTodo(SubmitTodoRequest submitTodoRequest)
+        public async Task<IActionResult> CreateTodo(SubmitTodoRequest submitTodoRequest)
         {
             var todo = new TodoItem
             {
                 Description = submitTodoRequest.Description
             };
 
-            _context.TodoItems.Add(todo);
-            _context.SaveChanges();
+            await todoRepository.AddAsync(todo);
+
+            TempData["Description"] = todo.Description;
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult EditTodo(long id)
+        public async Task<IActionResult> EditTodo(long id)
         {
-            var editTodo = _context.TodoItems.FirstOrDefault(x => x.Id == id);
+            var editTodo = await todoRepository.GetAsync(id);
 
             if (editTodo != null)
             {
@@ -69,7 +67,7 @@ namespace WazooTodoMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditTodo(EditTodoRequest editTodoRequest)
+        public async Task<IActionResult> EditTodo(EditTodoRequest editTodoRequest)
         {
             var todo = new TodoItem
             {
@@ -77,30 +75,21 @@ namespace WazooTodoMVC.Controllers
                 Description = editTodoRequest.Description
             };
 
-            var existingTodo = _context.TodoItems.Find(todo.Id);
+            var existingTodo = await todoRepository.UpdateAsync(todo);
 
-            if(existingTodo != null)
-            {
-                existingTodo.Description = editTodoRequest.Description;
+            TempData["EditedTodoId"] = existingTodo.Id.ToString();
 
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return RedirectToAction("EditTodo", new { id = editTodoRequest.Id });
+            return RedirectToAction("Index");
             
         }
 
         [HttpPost]
-        public JsonResult DeleteTodo(long id, string name)
+        public async Task<JsonResult> DeleteTodo(long id, string name)
         {
-
-            var deleteTodo = _context.TodoItems.Find(id);
+            var deleteTodo = await todoRepository.DeleteAsync(id);
 
             if (deleteTodo != null)
             {
-                _context.TodoItems.Remove(deleteTodo);
-                _context.SaveChangesAsync();
                 return Json(new { success = true });
             }
             else

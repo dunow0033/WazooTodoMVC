@@ -1,9 +1,12 @@
-﻿namespace WazooTodoMVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WazooTodoMVC.Models
 {
     public class TodoItem
     {
         public long Id { get; set; }
 
-        public String Description { get; set; }
+        [Required(ErrorMessage = "Description is required")]
+        public string Description { get; set; }
     }
 }
